@@ -34,7 +34,7 @@ run_cmd "sudo apt-get install unzip git docker.io ansible -y"
 run_cmd "sudo systemctl start docker"
 run_cmd "sudo systemctl enable docker"
 run_cmd "sudo usermod -aG docker ubuntu"
-run_cmd "sudo curl -L 'https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)' -o /usr/local/bin/docker-compose"
+run_cmd "sudo curl -L https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose"
 run_cmd "sudo chmod +x /usr/local/bin/docker-compose"
 
 log_info "Setup Completed Successfully"
