@@ -17,12 +17,22 @@ resource "aws_instance" "demo-server" {
   subnet_id                   = aws_subnet.demo_subnet.id
   vpc_security_group_ids      = [aws_security_group.demo-vpc-sg.id]
 
-  user_data = file("${path.module}/setup.sh")
-
   tags = {
     Name = "demo-server-${count.index}"
   }
+
+  provisioner "remote-exec" {
+    script = "${path.module}/setup.sh"
+
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = file("/Users/chaitanyamelam/easymedia.pem")
+      host        = self.public_ip
+    }
+  }
 }
+
 
 resource "aws_vpc" "demo-vpc" {
   cidr_block = var.vpc-cidr
